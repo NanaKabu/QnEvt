@@ -41,7 +41,7 @@ QnEvt 是一款 Windows 指定应用 SOCKS5 网络通道工具。它面向开发
 5. 在“应用管理”中启用需要走独立通道的应用。
 6. 点击“启动网络调试”，再启动目标应用进行验证。
 
-配置文件位于程序同级的 `QnEvt-V2-assets` 目录。应用图标以 `QnEvt-V2-assets\app` 文件夹为准，应用配置以 `QnEvt-V2-assets\config` 文件夹中的 JSON 为准。
+配置文件位于程序同级的 `QnEvt-assets` 目录。应用图标以 `QnEvt-assets\app` 文件夹为准，应用配置以 `QnEvt-assets\config` 文件夹中的 JSON 为准。
 
 ## 配置示例
 
@@ -62,7 +62,7 @@ QnEvt 是一款 Windows 指定应用 SOCKS5 网络通道工具。它面向开发
 
 当前推荐发布版本：`3.0.0`
 
-服务器后台发布时上传 ZIP 包，版本号填写 `3.0.0`。官网后台会自动生成公开下载文件和 `update.json`，桌面端会通过 HTTPS 检查更新。
+服务器后台发布时填写 GitHub Release 资产直链，版本号填写 `3.0.0`。官网首页下载按钮会直接使用该链接下载，`update.json` 也会返回该 GitHub 下载地址，桌面端会通过 HTTPS 检查更新。
 
 如果官网开启“研发中”模式，`update.json` 会返回 `available:false`，桌面端会显示暂无可下载版本，而不是更新失败。
 
@@ -93,3 +93,4 @@ QnEvt is distributed as closed-source software. Unless explicit written permissi
 QnEvt is a Windows per-application SOCKS5 network channel tool. It helps selected local applications use an independent SOCKS5 route while the rest of the system keeps its normal network environment.
 
 Use it only on devices, applications, services, and networks that you own or are authorized to manage.
+
