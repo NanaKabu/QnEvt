@@ -1,6 +1,3 @@
-可以，按你现在 `3.2`、GitHub/Gitee 分流、在线应用库、闭源发布的框架，我建议 README 改成下面这一版：
-
-```markdown
 # QnEvt
 
 ![Platform](https://img.shields.io/badge/Platform-Windows-blue)
