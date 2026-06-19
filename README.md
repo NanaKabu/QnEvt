@@ -1,49 +1,67 @@
+可以，按你现在 `3.2`、GitHub/Gitee 分流、在线应用库、闭源发布的框架，我建议 README 改成下面这一版：
+
+```markdown
 # QnEvt
 
 ![Platform](https://img.shields.io/badge/Platform-Windows-blue)
 ![Network](https://img.shields.io/badge/Network-SOCKS5-24d6a0)
 ![Distribution](https://img.shields.io/badge/Source-Closed-lightgrey)
 
-QnEvt 是一款 Windows 指定应用 SOCKS5 网络通道工具。它面向开发、测试和网络诊断场景，帮助你把选中的本机应用接入独立 SOCKS5 通道，其它软件继续使用原有网络环境。
+QnEvt 是一款 Windows 指定应用 SOCKS5 独立网络通道工具。它面向开发、测试、联调和网络诊断场景，帮助你让选中的本机应用走独立 SOCKS5 通道，其它软件继续保持原有网络环境。
 
-官网：[https://qnevt.com](https://qnevt.com)
-
+官网：[https://qnevt.com](https://qnevt.com)  
 下载：[GitHub Releases](https://github.com/NanaKabu/QnEvt/releases)
 
 ## 适合谁
 
-- 你只想让某个应用走代理，不想改系统全局代理。
+- 你只想让某个应用走代理，不想修改系统全局代理。
 - 你遇到全局代理导致个别应用卡顿、延迟升高或网络异常。
 - 你需要对 IDE、命令行工具、开发客户端或特定业务软件做独立网络调试。
+- 你希望不同应用保持不同网络路径，减少全局代理带来的误路由。
 - 你在自有或已获授权的设备、应用和网络环境中做连接诊断。
 
 ## 核心能力
 
 - 指定应用代理：只对选中的应用生效，减少对其它软件的影响。
 - SOCKS5 专用通道：当前版本专注 SOCKS5，支持地址、端口和可选账号密码。
-- 多进程应用配置：一个应用配置可以关联多个相关 `.exe`，例如 IDE 主程序、扩展进程和语言服务进程。
+- 多进程应用配置：一个应用配置可以关联多个相关 `.exe`，例如 IDE 主程序、扩展进程、语言服务进程和 WebView 辅助进程。
+- 在线应用库：支持从服务器同步公共应用配置，也支持通过加密 ID 下发定制应用配置。
+- 应用库缓存：应用配置和图标会缓存到本地，便于后续更新、重置和排序。
 - 连接诊断：提供启动状态、代理可信度、连接验证和运行日志。
+- 原生更新器：内置轻量 C++ updater，支持下载进度、校验和自动替换。
 - 免安装包形态：下载 ZIP 后解压，按说明启动即可使用。
 
 ## 系统要求
 
 - Windows 10/11 x64
 - 管理员权限
+- .NET 10 x64 Desktop Runtime
 - 合法、可信的 SOCKS5 服务
 - 正式分发版本应使用已认证签名的驱动
 
 ## 快速使用
 
-1. 从官网或 GitHub Releases 下载最新 `QnEvt-<version>-x64.zip`。
-2. 解压到一个固定目录，例如 `D:\Apps\QnEvt`。
-3. 以管理员身份运行 `QnEvt.exe`。
-4. 在“SOCKS5 配置”中填写服务器地址、端口和认证信息。
-5. 在“应用管理”中启用需要走独立通道的应用。
-6. 点击“启动网络调试”，再启动目标应用进行验证。
+1. 从官网或 Releases 下载最新 `QnEvt-<version>-x64.zip`。
+2. 安装 `.NET 10 x64 Desktop Runtime`。
+3. 解压到固定目录，例如 `D:\Apps\QnEvt`。
+4. 以管理员身份运行 `QnEvt.exe`。
+5. 在“SOCKS5 配置”中填写服务器地址、端口和认证信息。
+6. 在“应用管理”中点击“重置应用库”同步公共应用配置。
+7. 启用需要走独立通道的应用。
+8. 点击“启动网络调试”，再启动目标应用进行验证。
 
-配置文件位于程序同级的 `QnEvt-assets` 目录。应用图标以 `QnEvt-assets\app` 文件夹为准，应用配置以 `QnEvt-assets\config` 文件夹中的 JSON 为准。
+## 应用库与配置
 
-## 配置示例
+QnEvt 3.1 起，发布包默认不携带预置应用卡片。应用管理中的卡片来自服务器应用库，并缓存到本地。
+
+本地缓存位置：
+
+```text
+%LOCALAPPDATA%\QnEvt\apps
+%LOCALAPPDATA%\QnEvt\app-icons
+```
+
+应用配置示例：
 
 ```json
 {
@@ -56,13 +74,19 @@ QnEvt 是一款 Windows 指定应用 SOCKS5 网络通道工具。它面向开发
 }
 ```
 
-`ExecutableName` 可以只写一个进程名，例如 `"codex.exe"`；也可以用英文逗号写多个相关进程。应用卡片的“运行中”状态以第一个进程名为准。
+`ExecutableName` 可以只写一个进程名，例如 `"codex.exe"`；也可以用英文逗号写多个相关进程。应用卡片的“运行中”状态以第一个进程名为准，代理匹配会按配置中的进程列表生效。
 
 ## 发布与更新
 
-当前推荐发布版本：`3.0.0`
+当前推荐发布版本：`3.2.0`
 
-服务器后台发布时填写 GitHub Release 资产直链，版本号填写 `3.0.0`。官网首页下载按钮会直接使用该链接下载，`update.json` 也会返回该 GitHub 下载地址，桌面端会通过 HTTPS 检查更新。
+官网后台支持同时填写 GitHub 和 Gitee 发布包链接：
+
+- 国内 IP：优先返回 Gitee 下载链接
+- 国外 IP：优先返回 GitHub 下载链接
+- 任一链接为空时，会自动使用另一个链接兜底
+
+桌面端通过 HTTPS 请求 `update.json` 检查更新。更新清单会返回当前地区适合的 `downloadUrl`、版本号、SHA-256 和文件大小。下载完成后，QnEvt 会校验 SHA-256，再由原生 updater 解压并替换旧版本文件。
 
 如果官网开启“研发中”模式，`update.json` 会返回 `available:false`，桌面端会显示暂无可下载版本，而不是更新失败。
 
@@ -78,7 +102,7 @@ QnEvt is currently distributed as a closed-source Windows application. This repo
 
 Copyright © 2026 NanaKabu. All rights reserved.
 
-QnEvt 当前为闭源软件。除非获得权利人明确书面授权，否则不得复制、修改、反编译、反向工程、再分发、出售、出租、转授权本软件、驱动程序、图标、文档或其它随附资源。通过官网或 GitHub Releases 获取的发布包仅授权最终用户在合法授权环境中安装和使用。
+QnEvt 当前为闭源软件。除非获得权利人明确书面授权，否则不得复制、修改、反编译、反向工程、再分发、出售、出租、转授权本软件、驱动程序、图标、文档或其它随附资源。通过官网、GitHub Releases 或 Gitee Releases 获取的发布包仅授权最终用户在合法授权环境中安装和使用。
 
 本仓库中的 README、版本说明和更新元数据仅用于产品介绍、下载和更新分发，不代表源代码开源，也不授予任何开源许可证权利。
 
@@ -92,5 +116,5 @@ QnEvt is distributed as closed-source software. Unless explicit written permissi
 
 QnEvt is a Windows per-application SOCKS5 network channel tool. It helps selected local applications use an independent SOCKS5 route while the rest of the system keeps its normal network environment.
 
-Use it only on devices, applications, services, and networks that you own or are authorized to manage.
-
+QnEvt is currently distributed as closed-source software. Use it only on devices, applications, services, and networks that you own or are authorized to manage.
+```
