@@ -7,7 +7,6 @@
 QnEvt 是一款 Windows 指定应用 SOCKS5 独立网络通道工具。它面向开发、测试、联调和网络诊断场景，帮助你让选中的本机应用走独立 SOCKS5 通道，其它软件继续保持原有网络环境。
 
 官网：[https://qnevt.com](https://qnevt.com)  
-下载：[GitHub Releases](https://github.com/NanaKabu/QnEvt/releases)
 
 ## 适合谁
 
