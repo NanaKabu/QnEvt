@@ -39,53 +39,22 @@ QnEvt 是一款 Windows 指定应用 SOCKS5 独立网络通道工具。它面向
 ## 快速使用
 
 1. 从官网或 Releases 下载最新 `QnEvt-<version>-x64.zip`。
-2. 安装 `.NET 10 x64 Desktop Runtime`。
-3. 解压到固定目录，例如 `D:\Apps\QnEvt`。
-4. 以管理员身份运行 `QnEvt.exe`。
-5. 在“SOCKS5 配置”中填写服务器地址、端口和认证信息。
-6. 在“应用管理”中点击“重置应用库”同步公共应用配置。
-7. 启用需要走独立通道的应用。
-8. 点击“启动网络调试”，再启动目标应用进行验证。
+2. 解压到固定目录，例如 `D:\Apps\QnEvt`。
+3. 以管理员身份运行 `QnEvt.exe`。
+4. 在“SOCKS5 配置”中填写服务器地址、端口和认证信息。
+5. 在“应用管理”中点击“重置应用库”同步公共应用配置。
+6. 启用需要走独立通道的应用。
+7. 点击“启动网络调试”，再启动目标应用进行验证。
 
 ## 应用库与配置
 
-QnEvt 3.1 起，发布包默认不携带预置应用卡片。应用管理中的卡片来自服务器应用库，并缓存到本地。
-
-本地缓存位置：
-
-```text
-%LOCALAPPDATA%\QnEvt\apps
-%LOCALAPPDATA%\QnEvt\app-icons
-```
-
-应用配置示例：
-
-```json
-{
-  "Name": "Antigravity IDE",
-  "ExecutableName": "Antigravity IDE.exe,language_server_windows_x64.exe,node.exe,antigravity.exe,msedgewebview2.exe",
-  "ExecutablePath": null,
-  "IsSelected": true,
-  "IconPath": "",
-  "BypassRules": []
-}
-```
-
-`ExecutableName` 可以只写一个进程名，例如 `"codex.exe"`；也可以用英文逗号写多个相关进程。应用卡片的“运行中”状态以第一个进程名为准，代理匹配会按配置中的进程列表生效。
+QnEvt 3.1 起，发布包默认不携带预置应用卡片。应用管理中的卡片来自服务器应用库。
 
 ## 发布与更新
-
-当前推荐发布版本：`3.2.0`
-
 官网后台支持同时填写 GitHub 和 Gitee 发布包链接：
 
 - 国内 IP：优先返回 Gitee 下载链接
 - 国外 IP：优先返回 GitHub 下载链接
-- 任一链接为空时，会自动使用另一个链接兜底
-
-桌面端通过 HTTPS 请求 `update.json` 检查更新。更新清单会返回当前地区适合的 `downloadUrl`、版本号、SHA-256 和文件大小。下载完成后，QnEvt 会校验 SHA-256，再由原生 updater 解压并替换旧版本文件。
-
-如果官网开启“研发中”模式，`update.json` 会返回 `available:false`，桌面端会显示暂无可下载版本，而不是更新失败。
 
 ## 合规说明
 
