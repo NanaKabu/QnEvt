@@ -5,7 +5,7 @@
 ![Distribution](https://img.shields.io/badge/Source-Closed-lightgrey)
 
 QnEvt 是一款 Windows 指定应用独立网络通道工具。它面向开发、测试、联调和网络诊断场景，帮助你让选中的本机应用走独立网络通道，其它软件继续保持原有网络环境。
-
+（如果您有需要使用的应用未添加，请告诉我！）
 官网：[https://qnevt.com](https://qnevt.com)  
 
 <img width="1802" height="1110" alt="ScreenShot_2026-06-26_090625_218" src="https://github.com/user-attachments/assets/298876bf-7bd1-4d5d-9dfa-078a87cbe300" />
